@@ -2,102 +2,149 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MUMBAI HEAD OFFICE OFFICIAL</title>
+<title>Mumbai Head Office Official</title>
 <style>
 body{font-family:Arial;margin:0;background:#f5f5f5;text-align:center;}
 .header{background:#fff2a6;padding:15px;font-size:24px;font-weight:bold;}
 .company{font-size:28px;font-weight:bold;margin:15px;}
 .live{background:#bff0a6;padding:10px;font-size:22px;font-weight:bold;}
 .resultbox{background:#5a0033;color:white;margin:20px;padding:20px;border-radius:10px;line-height:30px;font-size:20px;}
-.info-box{background:#fff9c4;color:black;padding:12px;margin-bottom:15px;border-radius:10px;font-size:16px;line-height:22px;}
-.market-box{background:#ffe6f0;color:black;padding:12px;margin-bottom:15px;border-radius:10px;font-size:16px;line-height:22px;}
-.charge{font-size:24px;margin-top:15px;}
-.phone{font-size:24px;color:yellow;margin-top:10px;}
-.btn{display:inline-block;background:#ffb86b;padding:12px 25px;margin:10px;border-radius:10px;font-size:18px;text-decoration:none;color:black;}
-.qr{background:white;margin:20px;padding:20px;border-radius:10px;}
-.qr img{width:250px;}
-.proof{margin:20px;}
-.proof img{width:90%;max-width:400px;margin-top:20px;border-radius:10px;}
-.footer{background:#4b2e83;color:white;padding:20px;font-size:16px;margin-top:30px;}
-#paymentPopup{position:fixed;top:-100px;left:50%;transform:translateX(-50%);background:#00c853;color:white;padding:12px 20px;border-radius:10px;font-size:16px;box-shadow:0 5px 15px rgba(0,0,0,0.3);transition:0.6s;z-index:9999;}
+.market-result{background:#ffe6e6;color:black;padding:12px;margin-bottom:10px;border-radius:8px;line-height:24px;}
+.qr img{width:250px;margin:10px 0;}
+.btn-green{display:inline-block;background:#25D366;color:white;padding:12px 25px;border-radius:10px;text-decoration:none;margin:5px;}
+.btn-red{display:inline-block;background:#ff3d00;color:white;padding:12px 25px;border-radius:10px;text-decoration:none;margin:5px;}
+.proof img{width:90%;max-width:400px;border-radius:10px;margin-top:10px;}
+.admin-section{background:#eee;padding:20px;margin:20px;border-radius:10px;}
 </style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 </head>
 <body>
 
+<!-- Header -->
 <div class="header">!! विश्व की पहली मटका वेबसाइट !!<br>Since-2009</div>
 <div class="company">MUMBAI HEAD OFFICE OFFICIAL</div>
 <div class="live">📡 LIVE RESULT 📡</div>
 
-<div class="resultbox">
-
-  <!-- Info message box -->
-  <div class="info-box">
-    क्या आप भी पैसा दे कर हो गए हैं परेशान? लोगो को अभी तक सही गेम नही मिल पाए तो हम आपके लिए सीधा मुंबई हेड ऑफिस से गेम देंगे। हम से एक बार जोड़ कर देखिए। इसके बाद आपको किसी और के पास जाने की जरूरत नहीं पड़ेगी।
-  </div>
-
-  <!-- Market names box -->
-  <div class="market-box">
-    SRIDEVI & TIME BAZAR & MILAN DAY<br>
-    RAJDHANI DAY & KALYAN<br>
-    SRIDEVI NIGHT & MILAN NIGHT<br>
-    RAJDHANI NIGHT & KALYAN NIGHT<br>
-    MAIN BAZAR<br>
-    SINGLE JODI & SINGLE PANAL
-  </div>
-
-  <!-- Charge & contact -->
-  <div class="charge">ADVANCE CHARGE 2999/-</div>
-  <div class="phone">+91-8839100416</div>
-  <a class="btn" href="tel:+918839100416">CALL NOW</a>
-  <a class="btn" href="https://wa.me/918839100416">WHATSAPP</a>
-
+<!-- Result box -->
+<div class="resultbox" id="marketResults">
+Loading results...
 </div>
 
+<!-- QR + Pay -->
 <div class="qr">
-
 <h2>SCAN & PAY</h2>
-
 <img src="https://i.postimg.cc/hj1PD7XS/IMG-20260313-023014.jpg">
-
-<p style="font-size:18px;margin-top:15px;">
-इस पर पेमेंट डाल कर व्हाट्सएप पर स्क्रीनशॉट डालें <br>
-गेम व्हाट्सएप पर तुरंत मिल जाएगा
-</p>
-
-<a href="https://wa.me/918839100416" 
-style="display:inline-block;
-background:#25D366;
-color:white;
-padding:12px 25px;
-border-radius:10px;
-font-size:18px;
-text-decoration:none;
-margin-top:10px;">
-📲 WHATSAPP SCREENSHOT
-</a>
-
 <br>
-
-<a href="upi://pay?pa=8839100416-3@ibl&pn=Mumbai%20Head%20Office&am=2999&cu=INR"
-style="display:inline-block;
-background:#ff3d00;
-color:white;
-padding:14px 28px;
-border-radius:10px;
-font-size:20px;
-text-decoration:none;
-margin-top:15px;">
-💳 PAY NOW ₹2999
-</a>
-
-</div>
+<a href="https://wa.me/918839100416" class="btn-green">📲 WHATSAPP SCREENSHOT</a>
+<a href="upi://pay?pa=8839100416-3@ibl&pn=Mumbai%20Head%20Office&am=2999&cu=INR" class="btn-red">💳 PAY NOW ₹2999</a>
 </div>
 
-<!-- Auto Proof Section -->
+<!-- Proof Section -->
 <div class="proof">
 <h2>📷 PASSING PROOF</h2>
-<div id="proofContainer"></div>
+<div id="proofContainer">Loading proofs...</div>
 </div>
 
-<!-- Footer -->
-<div class="footer">
+<!-- Admin Section -->
+<div class="admin-section">
+<h2>Admin Login</h2>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<div id="adminPanel" style="display:none;">
+<h3>Update Live Result (JSON format)</h3>
+<textarea id="resultJSON" rows="10" cols="50" placeholder='{"SRIDEVI":{"numbers":"279-89-450","start":"11:35 AM","end":"12:35 AM"}}'></textarea>
+<br>
+<button onclick="updateResult()">Update Result</button>
+
+<h3>Add Proof</h3>
+<input id="proofDate" type="text" placeholder="DD-MM-YYYY">
+<input id="proofImg" type="text" placeholder="Image URL">
+<button onclick="addProof()">Add Proof</button>
+</div>
+</div>
+
+<!-- Firebase + Script -->
+<script>
+// ===== FIREBASE CONFIG =====
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const auth = firebase.auth();
+
+// ===== USER FRONTEND FUNCTIONS =====
+function fetchLiveResult(){
+  db.collection("results").doc("today").get().then(doc=>{
+    if(doc.exists){
+      const data = doc.data();
+      let html = '';
+      for(const market in data){
+        html += `<div class="market-result">
+                   <p>${market} : ${data[market].numbers}</p>
+                   <p>${data[market].start} - ${data[market].end}</p>
+                 </div>`;
+      }
+      document.getElementById('marketResults').innerHTML = html;
+    }
+  });
+}
+
+function fetchProofs(){
+  db.collection("proofs").orderBy("date","desc").limit(6).get().then(snapshot=>{
+    let html = '';
+    snapshot.forEach(doc=>{
+      const p = doc.data();
+      html += `<h3>${p.date}</h3><img src="${p.img}">`;
+    });
+    document.getElementById('proofContainer').innerHTML = html;
+  });
+}
+
+fetchLiveResult();
+fetchProofs();
+setInterval(fetchLiveResult,60*60*1000);
+
+// ===== ADMIN FUNCTIONS =====
+function login(){
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  auth.signInWithEmailAndPassword(email,password)
+  .then(()=>document.getElementById('adminPanel').style.display='block')
+  .catch(err=>alert(err.message));
+}
+
+function updateResult(){
+  const json = document.getElementById('resultJSON').value;
+  try{
+    const data = JSON.parse(json);
+    db.collection("results").doc("today").set(data).then(()=>alert("Result updated!"));
+  }catch(e){
+    alert("Invalid JSON format");
+  }
+}
+
+function addProof(){
+  const date = document.getElementById('proofDate').value;
+  const img = document.getElementById('proofImg').value;
+  if(date && img){
+    db.collection("proofs").add({date:date,img:img}).then(()=>alert("Proof added!"));
+  } else {
+    alert("Fill both fields");
+  }
+}
+</script>
+
+</body>
+</html>
